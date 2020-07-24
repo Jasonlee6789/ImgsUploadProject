@@ -1,0 +1,28 @@
+{
+  "name": "ImgsUploadProject",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jasonlee6789/ImgsUploadProject.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jasonlee6789/ImgsUploadProject/issues"
+  },
+  "homepage": "https://github.com/Jasonlee6789/ImgsUploadProject#readme",
+  "dependencies": {
+    "koa": "^2.13.0",
+    "koa-body": "^4.2.0",
+    "koa-router": "^9.1.0",
+    "koa-static": "^5.0.0",
+    "nodemon": "^2.0.4"
+  }
+}
