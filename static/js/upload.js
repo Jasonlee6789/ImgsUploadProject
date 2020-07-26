@@ -10,7 +10,6 @@ export function upload(previewImg) {
     };
     xhr.upload.onprogress = (e) => {
       console.log(e.loaded, e.total);
-
       previewImg.updateProgress(e.loaded, e.total);
     };
 

@@ -1,6 +1,7 @@
 //前端逻辑
 import PreviewImg from "./PreviewImg.js";
 import { upload } from "./upload.js";
+import { getAllPhotoes } from "./getAllPhotoes.js";
 
 const imgFile = document.querySelector(".imgFile");
 const imgFileAdd = document.querySelector(".imgFile-add");
@@ -94,3 +95,10 @@ function reset() {
 function hidemasking() {
   document.querySelector(".masking").style.display = "none";
 }
+
+//回显
+
+async function initUploadedImgs() {
+  await getAllPhotoes();
+}
+console.log(initUploadedImgs());
