@@ -116,8 +116,9 @@ function hidemasking() {
 async function renderShowImg() {
   parentElement.innerHTML = ``;
   const res = await getAllPhotoes();
-  console.log(res);
-  res[0].forEach((photoInfo) => {
+  const { data } = res.data;
+  console.log(data[0]);
+  data[0].forEach((photoInfo) => {
     new ShowImg(photoInfo);
   });
 }

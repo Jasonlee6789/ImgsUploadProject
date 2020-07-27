@@ -59,13 +59,5 @@ export default class PreviewImg {
 
     document.querySelector(".wantUpload").appendChild(div);
     return div;
-
-    // div.classList.add("imgContainer");
-    // div.innerHTML = `
-    // <img class="photoName" src="${this.file.name}" />
-    // `;
-
-    // document.querySelector(".photoHeader").appendChild(div);
-    // return div;
   }
 }

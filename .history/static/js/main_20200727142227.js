@@ -118,6 +118,6 @@ async function renderShowImg() {
   const res = await getAllPhotoes();
   console.log(res);
   res[0].forEach((photoInfo) => {
-    new ShowImg(photoInfo);
+    ShowImg(photoInfo);
   });
 }

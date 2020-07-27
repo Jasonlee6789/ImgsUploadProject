@@ -3,7 +3,7 @@ export function getAllPhotoes() {
     // console.log("initPhotos");
     const xhr = new XMLHttpRequest();
     xhr.open("get", "/getPhotos");
-    xhr.onload = () => {
+    xhr.load = () => {
       const dataArray = JSON.parse(xhr.response);
 
       resolve(dataArray);

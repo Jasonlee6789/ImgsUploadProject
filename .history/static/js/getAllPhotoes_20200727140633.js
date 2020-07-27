@@ -13,3 +13,4 @@ export function getAllPhotoes() {
 }
 
 console.log("ensure getAllPhotoes works");
+opo;

@@ -61,6 +61,11 @@ const router = new Router();
     ctx.body = dataArray;
   });
 })();
+
+app.use(router.routes());
+
+app.listen(8080);
+
 // function saveImg(img) {
 //   const readStream = fs.createReadStream(img.path);
 //   const imgName = img.name + "_" + Date.now();
@@ -88,7 +93,3 @@ const router = new Router();
 
 //   saveImgToData("upload/" + imgName, imgName);
 // }
-
-app.use(router.routes());
-
-app.listen(8080);
