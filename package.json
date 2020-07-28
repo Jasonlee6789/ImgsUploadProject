@@ -20,8 +20,10 @@
   "homepage": "https://github.com/Jasonlee6789/ImgsUploadProject#readme",
   "dependencies": {
     "fs": "0.0.1-security",
+    "jsonwebtoken": "^8.5.1",
     "koa": "^2.13.0",
     "koa-body": "^4.2.0",
+    "koa-jwt": "^4.0.0",
     "koa-router": "^9.1.0",
     "koa-static": "^5.0.0",
     "mysql2": "^2.1.0",

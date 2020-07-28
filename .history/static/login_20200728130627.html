@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="css/login.css" />
+    <link rel="stylesheet" href="../static/css/login.css" />
     <title>Document</title>
   </head>
 
@@ -17,35 +17,34 @@
         <input class="inputStyle" type="password" name="pwd" /><br />
         <input
           class="loginStyle"
-          type="button"
-          onclick="checkUser()"
+          type="submit"
+          onclick="onLogin()"
           value="登录"
         />
       </form>
 
       <script>
-        // function getPhotos() {
-        //   const xhr = new XMLHttpRequest();
-        //   xhr.open("get", "/getPhotos");
-        //   xhr.onload = () => {
-        //     const res = JSON.parse(xhr.response);
-        //     console.log(res);
-        //   };
-        //   //请求时带上JWT，放在HTTP请求头信息内， token通常被包产在名为Authorication的HTTP请求头
-        //   const token = localStorage.getItem("token");
-        //   xhr.setRequestHeader("Authorization", "Bearer " + token);
-        //   xhr.send();
-        // }
-        function checkUser() {
+        function getPhotos() {
+          const xhr = new XMLHttpRequest();
+          xhr.open("get", "/getPhotos");
+          xhr.onload = () => {
+            const res = JSON.parse(xhr.response);
+            console.log(res);
+          };
+          //请求时带上JWT，放在HTTP请求头信息内， token通常被包产在名为Authorication的HTTP请求头
+          const token = localStorage.getItem("token");
+          xhr.setRequestHeader("Authorization", "Bearer" + token);
+          xhr.send();
+        }
+        function onLogin() {
           const xhr = new XMLHttpRequest();
           xhr.open("post", "/login");
           xhr.onload = () => {
             const res = JSON.parse(xhr.response);
             console.log(res);
-            console.log("返回token");
+            console.log("ok");
             //客户端收到服务器返回的JWT，储存在localStorage
             localStorage.setItem("token", res.data.token);
-            location.href = "./photo.html";
           };
           const data = {
             username: "lijing",
@@ -53,8 +52,6 @@
           };
           xhr.setRequestHeader("content-type", "application/json");
           xhr.send(JSON.stringify(data));
-          return false;
-          // e.preventDefault();
         }
       </script>
     </div>

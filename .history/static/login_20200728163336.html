@@ -24,18 +24,18 @@
       </form>
 
       <script>
-        // function getPhotos() {
-        //   const xhr = new XMLHttpRequest();
-        //   xhr.open("get", "/getPhotos");
-        //   xhr.onload = () => {
-        //     const res = JSON.parse(xhr.response);
-        //     console.log(res);
-        //   };
-        //   //请求时带上JWT，放在HTTP请求头信息内， token通常被包产在名为Authorication的HTTP请求头
-        //   const token = localStorage.getItem("token");
-        //   xhr.setRequestHeader("Authorization", "Bearer " + token);
-        //   xhr.send();
-        // }
+        function getPhotos() {
+          const xhr = new XMLHttpRequest();
+          xhr.open("get", "/getPhotos");
+          xhr.onload = () => {
+            const res = JSON.parse(xhr.response);
+            console.log(res);
+          };
+          //请求时带上JWT，放在HTTP请求头信息内， token通常被包产在名为Authorication的HTTP请求头
+          const token = localStorage.getItem("token");
+          xhr.setRequestHeader("Authorization", "Bearer " + token);
+          xhr.send();
+        }
         function checkUser() {
           const xhr = new XMLHttpRequest();
           xhr.open("post", "/login");

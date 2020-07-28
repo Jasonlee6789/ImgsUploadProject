@@ -12,9 +12,7 @@ export function upload(previewImg) {
       console.log(e.loaded, e.total);
       previewImg.updateProgress(e.loaded, e.total);
     };
-    //请求时带上JWT，放在HTTP请求头信息内， token通常被包产在名为Authorication的HTTP请求头
-    const token = localStorage.getItem("token");
-    xhr.setRequestHeader("Authorization", "Bearer " + token);
+
     // 显示上传进度
     xhr.send(formData);
   });

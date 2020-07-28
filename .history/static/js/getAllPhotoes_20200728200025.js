@@ -7,7 +7,6 @@ export function getAllPhotoes() {
 
       resolve(dataArray);
     };
-    //请求时带上JWT，放在HTTP请求头信息内， token通常被包产在名为Authorication的HTTP请求头
     const token = localStorage.getItem("token");
     xhr.setRequestHeader("Authorization", "Bearer " + token);
     xhr.send();

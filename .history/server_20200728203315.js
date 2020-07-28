@@ -42,6 +42,7 @@ const router = new Router();
   });
 
   router.post("/upload", async (ctx) => {
+    t;
     //   console.log(ctx.request.files);
     let { img } = ctx.request.files;
     console.log(img);
@@ -59,18 +60,18 @@ const router = new Router();
 
     readStream.pipe(writeStream);
 
-    let userid = ctx.state.user.id;
-    console.log(ctx.state.user.id);
+    let userid =ctx.state.user.id；
+
     ctx.body = "Uploaded successfully";
 
-    const sql = `INSERT INTO photos (imgUrl,name,userid) VALUES (?,?,?)`;
+    const sql = `INSERT INTO photos (imgUrl,name,useid) VALUES (?,?,?)`;
 
     await connection.execute(sql, ["/upload/" + imgName, imgName, userid]);
   });
 
   router.get("/getPhotos", async (ctx) => {
-    const sql = `SELECT * FROM photos WHERE userid = "${ctx.state.user.id}"`;
-    // console.log(ctx.state);
+    const sql = `SELECT * FROM photos WHERE useid = "${ctx.state.user.uid}"`;
+    console.log(ctx.state);
     const dataArray = await connection.execute(sql);
     // const token = ctx.get("Authorication");
     ctx.body = dataArray;

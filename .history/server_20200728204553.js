@@ -42,6 +42,7 @@ const router = new Router();
   });
 
   router.post("/upload", async (ctx) => {
+    t;
     //   console.log(ctx.request.files);
     let { img } = ctx.request.files;
     console.log(img);
@@ -69,7 +70,7 @@ const router = new Router();
   });
 
   router.get("/getPhotos", async (ctx) => {
-    const sql = `SELECT * FROM photos WHERE userid = "${ctx.state.user.id}"`;
+    const sql = `SELECT * FROM photos WHERE useid = "${ctx.state.user.id}"`;
     // console.log(ctx.state);
     const dataArray = await connection.execute(sql);
     // const token = ctx.get("Authorication");

@@ -15,13 +15,13 @@ const secret = "woailijing";
 
 const app = new Koa();
 
-app.use(serve(__dirname + "/static"));
-
 app.use(
   koaBody({
     multipart: true,
   })
 );
+
+app.use(serve(__dirname + "/static"));
 
 app.use(
   koaJwt({
@@ -59,20 +59,20 @@ const router = new Router();
 
     readStream.pipe(writeStream);
 
-    let userid = ctx.state.user.id;
-    console.log(ctx.state.user.id);
     ctx.body = "Uploaded successfully";
 
-    const sql = `INSERT INTO photos (imgUrl,name,userid) VALUES (?,?,?)`;
+    const sql = `INSERT INTO photos (imgUrl,name) VALUES (?,?)`;
 
-    await connection.execute(sql, ["/upload/" + imgName, imgName, userid]);
+    await connection.execute(sql, ["/upload/" + imgName, imgName]);
   });
 
   router.get("/getPhotos", async (ctx) => {
-    const sql = `SELECT * FROM photos WHERE userid = "${ctx.state.user.id}"`;
-    // console.log(ctx.state);
+    const sql = `SELECT * FROM photos`;
+
     const dataArray = await connection.execute(sql);
+
     // const token = ctx.get("Authorication");
+
     ctx.body = dataArray;
   });
 
@@ -82,9 +82,8 @@ const router = new Router();
     const sql = `SELECT * FROM users WHERE username="${username}" AND PASSWORD = "${password}"`;
     let useInfo = await connection.execute(sql);
     console.log(useInfo);
-    console.log(useInfo[0][0].id);
     if (useInfo[0]) {
-      const token = jwt.sign({ id: useInfo[0][0].id }, secret, {
+      const token = jwt.sign({ id: useInfo[0].id }, secret, {
         expiresIn: "2h",
       });
 

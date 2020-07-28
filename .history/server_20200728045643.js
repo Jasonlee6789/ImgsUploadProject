@@ -15,19 +15,19 @@ const secret = "woailijing";
 
 const app = new Koa();
 
-app.use(serve(__dirname + "/static"));
-
 app.use(
   koaBody({
     multipart: true,
   })
 );
 
+app.use(serve(__dirname + "/static"));
+
 app.use(
   koaJwt({
-    secret: "woailijing",
+    secret,
   }).unless({
-    path: [/^\/login/],
+    path:[/^\/login],
   })
 );
 
@@ -59,71 +59,47 @@ const router = new Router();
 
     readStream.pipe(writeStream);
 
-    let userid = ctx.state.user.id;
-    console.log(ctx.state.user.id);
     ctx.body = "Uploaded successfully";
 
-    const sql = `INSERT INTO photos (imgUrl,name,userid) VALUES (?,?,?)`;
+    const sql = `INSERT INTO photos (imgUrl,name) VALUES (?,?)`;
 
-    await connection.execute(sql, ["/upload/" + imgName, imgName, userid]);
+    await connection.execute(sql, ["/upload/" + imgName, imgName]);
   });
 
   router.get("/getPhotos", async (ctx) => {
-    const sql = `SELECT * FROM photos WHERE userid = "${ctx.state.user.id}"`;
-    // console.log(ctx.state);
+    const sql = `SELECT * FROM photos`;
+
     const dataArray = await connection.execute(sql);
-    // const token = ctx.get("Authorication");
+
     ctx.body = dataArray;
   });
-
-  //验证用户名和密码
-  router.post("/login", async (ctx) => {
-    const { username, password } = ctx.request.body;
-    const sql = `SELECT * FROM users WHERE username="${username}" AND PASSWORD = "${password}"`;
-    let useInfo = await connection.execute(sql);
-    console.log(useInfo);
-    console.log(useInfo[0][0].id);
-    if (useInfo[0]) {
-      const token = jwt.sign({ id: useInfo[0][0].id }, secret, {
-        expiresIn: "2h",
-      });
-
-      ctx.body = {
-        state: 1,
-        msg: "login success",
-        data: {
-          token,
-        },
-      };
-    } else {
-      ctx.body = {
-        state: 0,
-        msg: "账号或者密码输入错误",
-        data: {},
-      };
-    }
-  });
 })();
+//验证用户名和密码
+router.post("/login", (ctx) => {
+  const { username, password } = ctx.request.body;
+  if (username === "lijing" && password === "666666") {
+    const token = jwt.sign({ id: 2 }, secret, {
+      expiresIn: "2h",
+    });
 
-// router.get("/getPhotos", (ctx) => {
-//   const token = ctx.get("Authorication");
-// jwt.verify(token, secret, (err, decoded) => {
-//   if (err) {
-//     ctx.body = {
-//       state: 0,
-//       msg: "login failed",
-//       data: {},
-//     };
-//     return;
-//   }
-//   ctx.body = {
-//     state: 0,
-//     msg: "login failed",
-//     data: { decoded },
-//   };
-// });
-// });
-
+    ctx.body = {
+      state: 1,
+      msg: "login success",
+      data: {
+        token,
+      },
+    };
+  } else {
+    ctx.body = {
+      state: 0,
+      msg: "账号或者密码输入错误",
+      data: {},
+    };
+  }
+});
+router.get("/getPhotos",(ctx)=>{
+  ctx.body = {name:"lijing"};
+})
 app.use(router.routes());
 
 app.listen(8080);

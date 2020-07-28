@@ -42,6 +42,7 @@ const router = new Router();
   });
 
   router.post("/upload", async (ctx) => {
+    t;
     //   console.log(ctx.request.files);
     let { img } = ctx.request.files;
     console.log(img);
